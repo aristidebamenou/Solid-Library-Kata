@@ -25,9 +25,24 @@ def add_borrowing(borrowing):
 
     borrowings_file = open(path + "borrowings.txt", "at")
 
-    borrowings_file.write(
-        f"{borrowing.member.username}, {borrowing.book.title}, {borrowing.date}, {borrowing.deadline}\n"
-    )
+    borrowings_file.write(f"{str(borrowing)}\n")
+
+    borrowings_file.close()
+
+
+def delete_borrowing(borrowing):
+
+    borrowings_file = open(path + "borrowings.txt", "rt")
+
+    borrowing_lines = borrowings_file.readlines()
+
+    borrowings_file.close()
+
+    borrowings_file = open(path + "borrowings.txt", "wt")
+
+    for line in borrowing_lines:
+        if line != f"{str(borrowing)}\n":
+            borrowings_file.write(line)
 
     borrowings_file.close()
 

@@ -14,6 +14,8 @@ class Member(User):
         borrowing = Borrowing(self, book)
         add_borrowing(borrowing)
 
+        return borrowing
+
     """
 
     def return_book(self, book: Book):
