@@ -1,12 +1,20 @@
+from .user import User
+from app.data import add_borrowing, borrowings_number
+from app.borrowing import Borrowing
+
+
 class Member(User):
     def __init__(self, username):
         super().__init__(username)
 
-    def borrow_book(self, book: Book):
-        if len(self.book_borrowed) == 3:
+    def borrow_book(self, book):
+        if borrowings_number(self) == 3:
             raise Exception("The user has already borrowed three books.")
 
-        self.book_borrowed.append(book)
+        borrowing = Borrowing(self, book)
+        add_borrowing(borrowing)
+
+    """
 
     def return_book(self, book: Book):
         if book not in self.book_borrowed:
@@ -14,3 +22,4 @@ class Member(User):
 
         self.book_borrowed.pop(self.book_borrowed.index(book))
         book.available = True
+    """
