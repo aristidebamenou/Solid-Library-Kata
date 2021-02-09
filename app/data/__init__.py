@@ -1,4 +1,4 @@
-from .handling_data import (
+from .borrowing import (
     add_borrowing,
     borrowing_exits,
     borrowings_number,
