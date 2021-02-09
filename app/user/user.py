@@ -1,4 +1,4 @@
-from data import book_list
+from app.data import get_all_books
 
 
 class User:
@@ -9,4 +9,4 @@ class User:
         return f"{self.__username}"
 
     def see_all_books(self):
-        return book_list
+        return get_all_books()
