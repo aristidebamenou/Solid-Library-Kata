@@ -30,7 +30,7 @@ def add_borrowing(borrowing):
     borrowings_file.close()
 
 
-def delete_borrowing(borrowing):
+def delete_borrowing(member, book):
 
     borrowings_file = open(path + "borrowings.txt", "rt")
 
@@ -41,7 +41,8 @@ def delete_borrowing(borrowing):
     borrowings_file = open(path + "borrowings.txt", "wt")
 
     for line in borrowing_lines:
-        if line != f"{str(borrowing)}\n":
+        borrowing = line.split(",")
+        if borrowing[0].strip() != member.username and book.title != borrowing[1].strip():
             borrowings_file.write(line)
 
     borrowings_file.close()
@@ -64,3 +65,18 @@ def borrowings_number(member):
     borrowings_file.close()
 
     return count
+
+
+def borrowing_exits(member, book):
+
+    borrowings_file = open(path + "borrowings.txt", "rt")
+
+    while True:
+        borrowing = borrowings_file.readline().split(",")
+        if len(borrowing) == 4:
+            if borrowing[0] == member.username and borrowing[1] == book.title:
+                return True
+        else:
+            break
+
+    return False

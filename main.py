@@ -3,6 +3,8 @@
 
 from app.user import Guest, Member
 from app.book import Book
+from app.data import delete_borrowing
+from app.borrowing import Borrowing
 
 
 def main():
@@ -11,9 +13,7 @@ def main():
 
     member = Member("Sido")
 
-    books = member.see_all_books()
-
-    member.borrow_book(book)
+    member.return_book(book)
 
 
 if __name__ == "__main__":

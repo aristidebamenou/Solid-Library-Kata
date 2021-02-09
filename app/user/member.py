@@ -1,6 +1,7 @@
-from .user import User
-from app.data import add_borrowing, borrowings_number
 from app.borrowing import Borrowing
+from app.data import add_borrowing, borrowing_exits, borrowings_number, delete_borrowing
+
+from .user import User
 
 
 class Member(User):
@@ -11,17 +12,16 @@ class Member(User):
         if borrowings_number(self) == 3:
             raise Exception("The user has already borrowed three books.")
 
+        if borrowings_exits(self, book):
+            raise Exception("The user has already borrowed this book")
+
         borrowing = Borrowing(self, book)
         add_borrowing(borrowing)
 
         return borrowing
 
-    """
-
-    def return_book(self, book: Book):
-        if book not in self.book_borrowed:
+    def return_book(self, book):
+        if not borrowing_exits(self, book):
             raise Exception("This book is not borrowed.")
 
-        self.book_borrowed.pop(self.book_borrowed.index(book))
-        book.available = True
-    """
+        delete_borrowing(self, book)
