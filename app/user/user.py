@@ -1,4 +1,5 @@
 from app.data import get_all_books
+from app.book import Book
 
 
 class User:
@@ -8,5 +9,6 @@ class User:
     def __repr__(self):
         return f"{self.username}"
 
-    def see_all_books(self):
-        return get_all_books()
+    def get_all_books(self):
+        books = get_all_books()
+        return [Book(book["title"], book["author"]) for book in books]

@@ -13,7 +13,7 @@ def main():
 
     member = Member("Sido")
 
-    member.return_book(book)
+    print(member.see_all_books())
 
 
 if __name__ == "__main__":
